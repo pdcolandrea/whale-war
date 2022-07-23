@@ -11,7 +11,7 @@ export const exampleRouter = t.router({
     }),
   postBattle: authedProcedure
     .input(z.object({ text: z.string().nullish() }).nullish())
-    .query(({ input, ctx }) => {
+    .mutation(({ input, ctx }) => {
       if (!ctx.session.user.id) {
         console.warn("user id not found")
         return null;
