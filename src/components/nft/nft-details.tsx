@@ -1,19 +1,19 @@
-import cn from 'classnames';
-import { StaticImageData } from 'next/image';
-import ParamTab, { TabPanel } from '@/components/ui/param-tab';
-import Image from '@/components/ui/image';
-import FeaturedCard from '@/components/nft/featured-card';
-import ListCard from '@/components/ui/list-card';
-import AuctionCountdown from '@/components/nft/auction-countdown';
-import AnchorLink from '@/components/ui/links/anchor-link';
-import Button from '@/components/ui/button';
-import { ArrowLinkIcon } from '@/components/icons/arrow-link-icon';
-import { DotsIcon } from '@/components/icons/dots-icon';
-import Avatar1 from '@/assets/images/avatar/3.png';
-import { useModal } from '@/components/modal-views/context';
-import { nftData } from '@/data/static/single-nft';
-import NftDropDown from './nft-dropdown';
-import Avatar from '@/components/ui/avatar';
+import cn from "classnames";
+import { StaticImageData } from "next/image";
+import ParamTab, { TabPanel } from "@/components/ui/param-tab";
+import Image from "@/components/ui/image";
+import FeaturedCard from "@/components/nft/featured-card";
+import ListCard from "@/components/ui/list-card";
+import AuctionCountdown from "@/components/nft/auction-countdown";
+import AnchorLink from "@/components/ui/links/anchor-link";
+import Button from "@/components/ui/button";
+import { ArrowLinkIcon } from "@/components/icons/arrow-link-icon";
+import { DotsIcon } from "@/components/icons/dots-icon";
+import Avatar1 from "@/assets/images/avatar/3.png";
+import { useModal } from "@/components/modal-views/context";
+import { nftData } from "@/data/static/single-nft";
+import NftDropDown from "./nft-dropdown";
+import Avatar from "@/components/ui/avatar";
 
 interface NftFooterProps {
   className?: string;
@@ -24,7 +24,7 @@ interface NftFooterProps {
 }
 
 function NftFooter({
-  className = 'md:hidden',
+  className = "md:hidden",
   currentBid,
   auctionTime,
   isAuction,
@@ -34,7 +34,7 @@ function NftFooter({
   return (
     <div
       className={cn(
-        'sticky bottom-0 z-10 bg-body dark:bg-dark md:-mx-2',
+        "sticky bottom-0 z-10 bg-body dark:bg-dark md:-mx-2",
         className
       )}
     >
@@ -43,9 +43,9 @@ function NftFooter({
           <div className="flex gap-4 pb-3.5 md:pb-4 xl:gap-5">
             <div className="block w-1/2 shrink-0 md:w-2/5">
               <h3 className="mb-1 truncate text-13px font-medium uppercase tracking-wider text-gray-900 dark:text-white sm:mb-1.5 sm:text-sm">
-                Current bid <span className="md:hidden">by</span>{' '}
+                Current bid <span className="md:hidden">by</span>{" "}
                 <AnchorLink
-                  href={currentBid?.authorSlug ?? '#'}
+                  href={currentBid?.authorSlug ?? "#"}
                   className="normal-case text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white md:hidden"
                 >
                   @{currentBid?.name}
@@ -55,7 +55,7 @@ function NftFooter({
                 {currentBid?.amount} ETH
               </div>
               <AnchorLink
-                href={currentBid?.authorSlug ?? '#'}
+                href={currentBid?.authorSlug ?? "#"}
                 className="mt-2 hidden items-center text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white md:inline-flex"
               >
                 <div className="h-6 w-6 rounded-full ltr:mr-2 rtl:ml-2">
@@ -75,14 +75,14 @@ function NftFooter({
 
         <div className="grid grid-cols-2 gap-3">
           <Button shape="rounded">
-            {isAuction ? 'PLACE A BID' : `BUY FOR ${price} ETH`}
+            {isAuction ? "PLACE A BID" : `BUY FOR ${price} ETH`}
           </Button>
           <Button
             shape="rounded"
             variant="solid"
             color="gray"
             className="dark:bg-gray-800"
-            onClick={() => openModal('SHARE_VIEW')}
+            onClick={() => openModal("SHARE_VIEW")}
           >
             SHARE
           </Button>
@@ -131,13 +131,7 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
       <div className="mx-auto flex w-full flex-grow flex-col transition-all xl:max-w-[1360px] 4xl:max-w-[1760px]">
         <div className="relative mb-5 flex flex-grow items-center justify-center md:pb-7 md:pt-4 ltr:md:left-0 ltr:md:pl-6 rtl:md:right-0 rtl:md:pr-6 lg:fixed lg:mb-0 lg:h-[calc(100%-96px)] lg:w-[calc(100%-492px)] ltr:lg:pl-8 rtl:lg:pr-8 xl:w-[calc(100%-550px)] ltr:xl:pr-12 ltr:xl:pl-[340px] rtl:xl:pl-12 rtl:xl:pr-[340px] ltr:2xl:pl-96 rtl:2xl:pr-96 3xl:w-[calc(100%-632px)] ltr:4xl:pl-0 rtl:4xl:pr-0">
           <div className="flex h-full max-h-full w-full items-center justify-center lg:max-w-[768px]">
-            <div className="relative aspect-square max-h-full overflow-hidden rounded-lg">
-              <Image
-                src={image}
-                alt={name}
-                className="h-full bg-gray-200 dark:bg-light-dark"
-              />
-            </div>
+            <div className="relative aspect-square max-h-full overflow-hidden rounded-lg"></div>
           </div>
         </div>
 
@@ -188,16 +182,16 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
               <ParamTab
                 tabMenu={[
                   {
-                    title: 'Details',
-                    path: 'details',
+                    title: "Details",
+                    path: "details",
                   },
                   {
-                    title: 'Bids',
-                    path: 'bids',
+                    title: "Bids",
+                    path: "bids",
                   },
                   {
-                    title: 'History',
-                    path: 'history',
+                    title: "History",
+                    path: "history",
                   },
                 ]}
               >

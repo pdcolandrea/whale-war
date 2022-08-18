@@ -1,12 +1,12 @@
-import Button from '@/components/ui/button';
-import { WalletContext } from '@/lib/hooks/use-connect';
-import { Menu } from '@/components/ui/menu';
-import { Transition } from '@/components/ui/transition';
-import ActiveLink from '@/components/ui/links/active-link';
-import { ChevronForward } from '@/components/icons/chevron-forward';
-import { PowerIcon } from '@/components/icons/power';
-import { useModal } from '@/components/modal-views/context';
-import { useContext } from 'react';
+import Button from "@/components/ui/button";
+import { WalletContext } from "@/lib/hooks/use-connect";
+import { Menu } from "@/components/ui/menu";
+import { Transition } from "@/components/ui/transition";
+import ActiveLink from "@/components/ui/links/active-link";
+import { ChevronForward } from "@/components/icons/chevron-forward";
+import { PowerIcon } from "@/components/icons/power";
+import { useModal } from "@/components/modal-views/context";
+import { useContext } from "react";
 
 export default function WalletConnect() {
   const { openModal } = useModal();
@@ -50,7 +50,7 @@ export default function WalletConnect() {
                           </span>
                           <span className="rounded-lg bg-gray-100 px-2 py-1 text-sm tracking-tighter dark:bg-gray-800">
                             {address.slice(0, 6)}
-                            {'...'}
+                            {"..."}
                             {address.slice(address.length - 6)}
                           </span>
                         </div>
@@ -82,10 +82,10 @@ export default function WalletConnect() {
         </div>
       ) : (
         <Button
-          onClick={() => openModal('WALLET_CONNECT_VIEW')}
+          onClick={() => openModal("WALLET_CONNECT_VIEW")}
           className="shadow-main hover:shadow-large"
         >
-          CONNECT
+          Log In
         </Button>
       )}
     </>
