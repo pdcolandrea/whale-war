@@ -14,6 +14,11 @@ import { useModal } from "@/components/modal-views/context";
 import { nftData } from "@/data/static/single-nft";
 import NftDropDown from "./nft-dropdown";
 import Avatar from "@/components/ui/avatar";
+import { SwapIcon } from "../icons/swap-icon";
+import CoinInput from "../ui/coin-input";
+import Trade from "../ui/trade";
+import TransactionInfo from "../ui/transaction-info";
+import { useState } from "react";
 
 interface NftFooterProps {
   className?: string;
@@ -113,6 +118,8 @@ type NftDetailsProps = {
 };
 
 export default function NftDetails({ product }: { product: NftDetailsProps }) {
+  let [toggleCoin, setToggleCoin] = useState(false);
+
   const {
     isAuction,
     image,
@@ -136,146 +143,57 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
         </div>
 
         <div className="relative flex w-full flex-grow flex-col justify-between ltr:md:ml-auto ltr:md:pl-8 rtl:md:mr-auto rtl:md:pr-8 lg:min-h-[calc(100vh-96px)] lg:w-[460px] ltr:lg:pl-12 rtl:lg:pr-12 xl:w-[592px] ltr:xl:pl-20 rtl:xl:pr-20">
-          <div className="block">
-            <div className="block">
-              <div className="flex justify-between">
-                <h2 className="text-xl font-medium leading-[1.45em] -tracking-wider text-gray-900 dark:text-white md:text-2xl xl:text-3xl">
-                  {name}
-                </h2>
-                <div className="mt-1.5 shrink-0 ltr:ml-3 rtl:mr-3 xl:mt-2">
-                  <NftDropDown />
-                </div>
-              </div>
-              <AnchorLink
-                href={minted_slug}
-                className="mt-1.5 inline-flex items-center text-sm -tracking-wider text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white xl:mt-2.5"
+          <Trade>
+            <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
+              <div
+                className={cn(
+                  "relative flex gap-3",
+                  toggleCoin ? "flex-col-reverse" : "flex-col"
+                )}
               >
-                Minted on {minted_date}
-                <ArrowLinkIcon className="h-3 w-3 ltr:ml-2 rtl:mr-2" />
-              </AnchorLink>
-              <div className="mt-4 flex flex-wrap gap-6 pt-0.5 lg:-mx-6 lg:mt-6 lg:gap-0">
-                <div className="shrink-0 border-dashed border-gray-200 dark:border-gray-700 lg:px-6 lg:ltr:border-r lg:rtl:border-l">
-                  <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                    Created By
-                  </h3>
-                  <AnchorLink href={creator?.slug} className="inline-flex">
-                    <ListCard
-                      item={creator}
-                      className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    />
-                  </AnchorLink>
+                <CoinInput
+                  label={"From"}
+                  exchangeRate={0.0}
+                  defaultCoinIndex={0}
+                  getCoinValue={(data) => console.log("From coin value:", data)}
+                />
+                <div className="absolute top-1/2 left-1/2 z-[1] -mt-4 -ml-4 rounded-full bg-white shadow-large dark:bg-gray-600">
+                  <Button
+                    size="mini"
+                    color="gray"
+                    shape="circle"
+                    variant="transparent"
+                    onClick={() => setToggleCoin(!toggleCoin)}
+                  >
+                    <SwapIcon className="h-auto w-3" />
+                  </Button>
                 </div>
-                <div className="shrink-0 lg:px-6">
-                  <h3 className="text-heading-style mb-2.5 uppercase text-gray-900 dark:text-white">
-                    Collection
-                  </h3>
-                  <AnchorLink href="#" className="inline-flex">
-                    <ListCard
-                      item={collection}
-                      className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                    />
-                  </AnchorLink>
-                </div>
+                <CoinInput
+                  label={"To"}
+                  exchangeRate={0.0}
+                  defaultCoinIndex={1}
+                  getCoinValue={(data) => console.log("To coin value:", data)}
+                />
               </div>
             </div>
-            <div className="mt-5 flex flex-col pb-5 xl:mt-9">
-              <ParamTab
-                tabMenu={[
-                  {
-                    title: "Details",
-                    path: "details",
-                  },
-                  {
-                    title: "Bids",
-                    path: "bids",
-                  },
-                  {
-                    title: "History",
-                    path: "history",
-                  },
-                ]}
-              >
-                <TabPanel className="focus:outline-none">
-                  <div className="space-y-6">
-                    <div className="block">
-                      <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                        Description
-                      </h3>
-                      <div className="text-sm leading-6 -tracking-wider text-gray-600 dark:text-gray-400">
-                        {description}
-                      </div>
-                    </div>
-                    <div className="block">
-                      <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                        Owner
-                      </h3>
-                      <AnchorLink href={owner?.slug} className="inline-block">
-                        <ListCard
-                          item={owner}
-                          className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                        />
-                      </AnchorLink>
-                    </div>
-                    <div className="block">
-                      <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                        Block Chain
-                      </h3>
-                      <div className="flex flex-col gap-2">
-                        {block_chains?.map((item: any) => (
-                          <AnchorLink
-                            href="#"
-                            className="inline-flex"
-                            key={item?.id}
-                          >
-                            <ListCard
-                              item={item}
-                              className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                            />
-                          </AnchorLink>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </TabPanel>
-                <TabPanel className="focus:outline-none">
-                  <div className="flex flex-col-reverse">
-                    {nftData?.bids?.map((bid) => (
-                      <FeaturedCard
-                        item={bid}
-                        key={bid?.id}
-                        className="mb-3 first:mb-0"
-                      />
-                    ))}
-                  </div>
-                </TabPanel>
-                <TabPanel className="focus:outline-none">
-                  <div className="flex flex-col-reverse">
-                    {nftData?.history?.map((item) => (
-                      <FeaturedCard
-                        item={item}
-                        key={item?.id}
-                        className="mb-3 first:mb-0"
-                      />
-                    ))}
-                  </div>
-                </TabPanel>
-              </ParamTab>
+            <div className="flex flex-col gap-4 xs:gap-[18px]">
+              <TransactionInfo label={"Min. Received"} />
+              <TransactionInfo label={"Rate"} />
+              <TransactionInfo label={"Offered by"} />
+              <TransactionInfo label={"Price Slippage"} value={"1%"} />
+              <TransactionInfo label={"Network Fee"} />
+              <TransactionInfo label={"Criptic Fee"} />
             </div>
-          </div>
-          <NftFooter
-            className="hidden md:block"
-            currentBid={nftData?.bids[nftData?.bids?.length - 1]}
-            auctionTime={Date.now() + 4000000 * 10}
-            isAuction={isAuction}
-            price={price}
-          />
+            <Button
+              size="large"
+              shape="rounded"
+              fullWidth={true}
+              className="mt-6 uppercase xs:mt-8 xs:tracking-widest"
+            >
+              SWAP
+            </Button>
+          </Trade>
         </div>
-        <NftFooter
-          currentBid={nftData?.bids[nftData?.bids?.length - 1]}
-          auctionTime={Date.now() + 4000000 * 10}
-          isAuction={isAuction}
-          price={price}
-        />
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
-import type { CoinTypes } from '@/types';
-import { useState, useRef } from 'react';
-import dynamic from 'next/dynamic';
-import { motion, AnimatePresence } from 'framer-motion';
-import cn from 'classnames';
-import { ChevronDown } from '@/components/icons/chevron-down';
-import { useClickAway } from '@/lib/hooks/use-click-away';
-import { useLockBodyScroll } from '@/lib/hooks/use-lock-body-scroll';
-import { coinList } from '@/data/static/coin-list';
+import type { CoinTypes } from "@/types";
+import { useState, useRef } from "react";
+import dynamic from "next/dynamic";
+import { motion, AnimatePresence } from "framer-motion";
+import cn from "classnames";
+import { ChevronDown } from "@/components/icons/chevron-down";
+import { useClickAway } from "@/lib/hooks/use-click-away";
+import { useLockBodyScroll } from "@/lib/hooks/use-lock-body-scroll";
+import { coinList } from "@/data/static/coin-list";
 // dynamic import
 const CoinSelectView = dynamic(
-  () => import('@/components/ui/coin-select-view')
+  () => import("@/components/ui/coin-select-view")
 );
 
 interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -30,7 +30,7 @@ export default function CoinInput({
   className,
   ...rest
 }: CoinInputTypes) {
-  let [value, setValue] = useState('');
+  let [value, setValue] = useState("");
   let [selectedCoin, setSelectedCoin] = useState(coinList[defaultCoinIndex]);
   let [visibleCoinList, setVisibleCoinList] = useState(false);
   const modalContainerRef = useRef<HTMLDivElement>(null);
@@ -53,7 +53,7 @@ export default function CoinInput({
     <>
       <div
         className={cn(
-          'group flex min-h-[70px] rounded-lg border border-gray-200 transition-colors duration-200 hover:border-gray-900 dark:border-gray-700 dark:hover:border-gray-600',
+          "group flex min-h-[70px] rounded-lg border border-gray-200 transition-colors duration-200 hover:border-gray-900 dark:border-gray-700 dark:hover:border-gray-600",
           className
         )}
       >
@@ -65,7 +65,7 @@ export default function CoinInput({
             onClick={() => setVisibleCoinList(true)}
             className="flex items-center font-medium outline-none dark:text-gray-100"
           >
-            {selectedCoin?.icon}{' '}
+            {selectedCoin?.icon}{" "}
             <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
             <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
           </button>
@@ -81,7 +81,7 @@ export default function CoinInput({
             {...rest}
           />
           <span className="font-xs px-3 text-gray-400">
-            = ${exchangeRate ? exchangeRate : '0.00'}
+            = ${exchangeRate ? exchangeRate : "0.00"}
           </span>
         </div>
       </div>
@@ -121,4 +121,4 @@ export default function CoinInput({
   );
 }
 
-CoinInput.displayName = 'CoinInput';
+CoinInput.displayName = "CoinInput";
